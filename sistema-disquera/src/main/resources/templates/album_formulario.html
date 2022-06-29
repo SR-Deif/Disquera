@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Album</title>
+<link rel="stylesheet" type="text/css" href="/sass/estilo.css">
+<link rel="stylesheet" type="text/css" href="/sass/menu.css">
+<link rel="stylesheet"  type="text/css" th:href="@{/sass/estilo.css}"/>
+<link rel="stylesheet" type="text/css" th:href="@{/sass/menu.css}"/>
+<link rel="stylesheet" type="text/css" href="/sass/Boton.css">
+<link rel="stylesheet"  type="text/css" th:href="@{/sass/Boton.css}"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="">Album</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container text-center">
+		<div>
+			<h1 th:if="${album.idAlbum == null}">Registrar de Album</h1>
+			<h1 th:unless="${album.idAlbum == null}">Editar Album</h1>
+		</div>
+		<form th:action="@{/albums/guardar}" th:object="${album}"
+			method="post" style="max-width: 600px; margin: 0 auto;">
+			<input type="hidden" th:field="*{idAlbum}" th:value="${album.idAlbum}" />
+			<div class="m-3">
+				<div class="form-group row">
+					<label class="col-form-label col-sm-4">Nombre Album :
+					</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{nombreAlbum}" class="form-control"
+							required />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-form-label col-sm-4">año de Publicacion :
+					</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{anioPublicacion}" class="form-control"
+							required />
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-form-label col-sm-4">Estado :
+					</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{estadoAlbum}" class="form-control"
+							required />
+					</div>
+				</div>
+				
+				<!--Artista-->
+				<div class="form-group row">
+					<label class="col-form-label col-sm-4">Artistas : </label>
+					<div class="col-sm-8">
+						<select th:field="*{artista}" class="form-control" required>
+							<th:block th:each="artista : ${listaArtistas}">
+								<!--recorre toda la lista de la disquera que le coloque en el controlador-->
+								<option th:text="${artista.nombreArtistico}" th:value="${artista.idArtista}"></option>
+								<!--el texto va ser el nombre pero con el id me guarda el objeto es lo mas importante-->
+							</th:block>
+						</select>
+					</div>
+				</div>
+				<div class="text-center p">
+					<button class="boton" type="submit">
+						<a  style="--clr:#AA07B5"><span>Guardar</span><i></i></a>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>artista</title>
+<link rel="stylesheet" type="text/css" href="/sass/estilo.css">
+<link rel="stylesheet"  type="text/css" th:href="@{/sass/estilo.css}"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="">Artistas</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container text-center">
+		
+			<h1>Lista de artistas</h1>
+		
+		<br>
+		<div>
+			<table class="table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>ID</th>
+						<th>no Documento</th>
+						<th>Tipo</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Nombre Artistico</th>
+						<th>Fecha</th>
+						<th>Email</th>
+						<th>Estado</th>
+						<th>Disquera</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="artista : ${listaArtistas}">
+						<td th:text="${artista.idArtista}"></td>
+						<td th:text="${artista.noDocumento}"></td>
+						<td th:text="${artista.tipoDocumento}"></td>
+						<td th:text="${artista.nombreArtista}"></td>
+						<td th:text="${artista.apellidoArtista}"></td>
+						<td th:text="${artista.nombreArtistico}"></td>
+						<td th:text="${artista.fechanacimArtista}"></td>
+						<td th:text="${artista.emailArtista}"></td>
+						<td th:text="${artista.estadoArtista}"></td>
+						<td th:text="${artista.disquera.nombreDisquera}"></td>
+						<td><a th:href="@{'/artistas/editar'+'/'+ ${artista.idArtista}}"class="btn btn-info">Editar</a> &nbsp; 
+							<a th:href="@{'/artistas/eliminar'+ '/' + ${artista.idArtista}}"class="btn btn-danger">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
